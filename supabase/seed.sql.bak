@@ -1,0 +1,130 @@
+-- FIFA 2026 VIP Database Schema
+-- Seeds automatically when `supabase start` runs
+
+CREATE TABLE IF NOT EXISTS public.venues (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  city TEXT NOT NULL,
+  country TEXT NOT NULL,
+  capacity INTEGER NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS public.matches (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  venue_id UUID REFERENCES public.venues(id),
+  match_type TEXT NOT NULL,
+  match_date DATE NOT NULL,
+  match_time TEXT,
+  description TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS public.packages (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  match_id UUID REFERENCES public.matches(id),
+  description TEXT,
+  price_usd DECIMAL(15,2) NOT NULL,
+  includes_jet BOOLEAN DEFAULT false,
+  includes_rolls_royce BOOLEAN DEFAULT false,
+  includes_hospitality BOOLEAN DEFAULT true,
+  seats TEXT,
+  available INTEGER DEFAULT 1,
+  crypto_only BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS public.clients (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
+  country TEXT,
+  client_type TEXT DEFAULT 'hnwi',
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS public.bookings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  client_id UUID REFERENCES public.clients(id),
+  package_id UUID REFERENCES public.packages(id),
+  quantity INTEGER DEFAULT 1,
+  total_usd DECIMAL(15,2),
+  crypto_currency TEXT,
+  crypto_amount DECIMAL(20,8),
+  crypto_tx_hash TEXT,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS public.enquiries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  country TEXT,
+  message TEXT,
+  interest TEXT,
+  preferred_crypto TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS
+ALTER TABLE public.venues ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.matches ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.packages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.clients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.bookings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.enquiries ENABLE ROW LEVEL SECURITY;
+
+-- Public read + enquiry insert
+CREATE POLICY venues_public_select ON public.venues FOR SELECT USING (true);
+CREATE POLICY matches_public_select ON public.matches FOR SELECT USING (true);
+CREATE POLICY packages_public_select ON public.packages FOR SELECT USING (true);
+CREATE POLICY enquiries_public_insert ON public.enquiries FOR INSERT WITH CHECK (true);
+
+-- Seed venues
+INSERT INTO public.venues (name, city, country, capacity) VALUES
+('AT&T Stadium', 'Dallas', 'USA', 94000),
+('Estadio Azteca', 'Mexico City', 'Mexico', 83000),
+('MetLife Stadium', 'New York/New Jersey', 'USA', 82500),
+('Mercedes-Benz Stadium', 'Atlanta', 'USA', 75000),
+('SoFi Stadium', 'Los Angeles', 'USA', 70000),
+('Hard Rock Stadium', 'Miami', 'USA', 65000),
+('BC Place', 'Vancouver', 'Canada', 54000),
+('BMO Field', 'Toronto', 'Canada', 45000);
+
+-- Seed matches
+DO $$
+DECLARE
+  azteca_id UUID; metlife_id UUID; att_id UUID; mbs_id UUID;
+BEGIN
+  SELECT id INTO azteca_id FROM public.venues WHERE name = 'Estadio Azteca';
+  SELECT id INTO metlife_id FROM public.venues WHERE name = 'MetLife Stadium';
+  SELECT id INTO att_id FROM public.venues WHERE name = 'AT&T Stadium';
+  SELECT id INTO mbs_id FROM public.venues WHERE name = 'Mercedes-Benz Stadium';
+
+  INSERT INTO public.matches (venue_id, match_type, match_date, description) VALUES
+  (azteca_id, 'opening', '2026-06-11', 'Opening Match'),
+  (metlife_id, 'final', '2026-07-19', 'World Cup Final 2026'),
+  (att_id, 'semifinal', '2026-07-14', 'Semi-Final 1'),
+  (mbs_id, 'semifinal', '2026-07-15', 'Semi-Final 2');
+
+  INSERT INTO public.packages (name, match_id, description, price_usd, includes_jet, includes_rolls_royce, seats, available, crypto_only)
+  SELECT 'Presidential Suite - Final', id, 'Ultimate VIP: Presidential suite at MetLife, private jet transfer, Rolls Royce pickup/dropoff, personal concierge', 250000, true, true, 'presidential_suite', 2, false
+  FROM public.matches WHERE match_type = 'final';
+
+  INSERT INTO public.packages (name, match_id, description, price_usd, includes_hospitality, seats, available)
+  SELECT 'Skybox VIP - Semi-Final', id, 'Premium skybox suite with catering and private bar', 85000, true, 'vip_suite', 4
+  FROM public.matches WHERE match_type = 'semifinal' AND description = 'Semi-Final 1';
+
+  INSERT INTO public.packages (name, match_id, description, price_usd, includes_rolls_royce, seats, available)
+  SELECT 'Rolls Royce Platinum - Opening', id, 'Rolls Royce Phantom pickup, Category 1 seats, champagne lounge', 45000, true, 'category_1', 4
+  FROM public.matches WHERE match_type = 'opening';
+
+  INSERT INTO public.packages (name, match_id, description, price_usd, includes_jet, includes_rolls_royce, seats, available, crypto_only)
+  SELECT 'Crypto Whale Concierge - Final', id, 'Gulfstream G650 jet, Rolls Royce fleet, penthouse suite, personal butler. BTC/ETH only.', 500000, true, true, 'presidential_suite', 1, true
+  FROM public.matches WHERE match_type = 'final';
+END $$;
