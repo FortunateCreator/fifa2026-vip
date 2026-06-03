@@ -28,23 +28,43 @@ function getPostBySlug(slug: string): BlogPost | null {
 }
 
 function renderMarkdown(md: string): string {
+  // Process bold, italic, links first (inline)
   let html = md
-    .replace(/^### (.+)$/gm, '<h3 class="text-xl font-bold text-white mt-8 mb-3">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-white mt-10 mb-4">$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1 class="text-3xl font-bold text-white mt-10 mb-4">$1</h1>')
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-gold-400 underline">$1</a>')
-    .replace(/^- (.+)$/gm, '<li class="text-gray-300 ml-5 list-disc">$1</li>')
+
+  // Split into blocks on double newlines
   const blocks = html.split('\n\n')
   return blocks.map((block: string) => {
-    if (block.startsWith('<h') || block.startsWith('<li') || block.startsWith('<')) return block
-    return '<p class="text-gray-300 leading-relaxed mb-4">' + block.replace(/\n/g, '<br/>') + '</p>'
-  }).join('\n')
+    const trimmed = block.trim()
+    if (!trimmed) return ''
+
+    // Headings
+    if (/^### /.test(trimmed)) return `<h3 class="text-xl font-bold text-white mt-8 mb-3">${trimmed.replace(/^### /, '')}</h3>`
+    if (/^## /.test(trimmed)) return `<h2 class="text-2xl font-bold text-white mt-10 mb-4">${trimmed.replace(/^## /, '')}</h2>`
+    if (/^# /.test(trimmed)) return `<h1 class="text-3xl font-bold text-white mt-10 mb-4">${trimmed.replace(/^# /, '')}</h1>`
+
+    // List blocks (one or more lines starting with -)
+    if (/^- /m.test(trimmed)) {
+      const items = trimmed.split('\n').map(l => {
+        const clean = l.replace(/^- /, '')
+        return `<li class="text-gray-300 ml-5 list-disc mb-1">${clean}</li>`
+      }).join('\n')
+      return `<ul class="mb-4 space-y-1">${items}</ul>`
+    }
+
+    // Horizontal rule (--- alone on a line)
+    if (/^---$/.test(trimmed)) return '<hr class="my-8 border-dark-border" />'
+
+    // Regular paragraph — escape remaining HTML, convert single newlines to breaks
+    return `<p class="text-gray-300 leading-relaxed mb-4">${trimmed.replace(/\n/g, '<br/>')}</p>`
+  }).filter(Boolean).join('\n')
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   if (!post) notFound()
 
   const articleSchema = {
