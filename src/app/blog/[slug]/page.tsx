@@ -47,8 +47,21 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug)
   if (!post) notFound()
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    keywords: post.keywords?.join(', '),
+    datePublished: post.created_at,
+    author: { '@type': 'Organization', name: 'Vantage 26' },
+    publisher: { '@type': 'Organization', name: 'Vantage 26' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://vantage26.com/blog/${post.slug}` },
+  }
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Link href="/blog" className="mb-8 inline-block text-sm text-gold-400 hover:underline">&larr; Back to articles</Link>
       <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">{post.title}</h1>
       <div className="mb-8 flex flex-wrap gap-2">

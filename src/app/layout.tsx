@@ -14,6 +14,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              { '@type': 'Organization', name: 'Vantage 26', url: 'https://vantage26.com', logo: 'https://vantage26.com/logo.png', description: 'FIFA 2026 VIP hospitality concierge. Private jets, Rolls Royce transfers, presidential suites for HNWI clients.', sameAs: [] },
+              { '@type': 'WebSite', name: 'Vantage 26', url: 'https://vantage26.com', description: 'FIFA 2026 VIP Hospitality & Ticket Concierge', potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: 'https://vantage26.com/search?q={search_term_string}' }, 'query-input': 'required name=search_term_string' } },
+            ],
+          }),
+        }} />
         <Navbar />
         <main className="pt-16">{children}</main>
         <footer className="border-t border-dark-border py-8 text-center text-sm text-gray-600">

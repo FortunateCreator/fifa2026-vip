@@ -2,10 +2,34 @@ import Hero from '@/components/Hero'
 import PackageGrid from '@/components/PackageGrid'
 import ServicesSection from '@/components/ServicesSection'
 import ContactForm from '@/components/ContactForm'
+import { packages } from '@/lib/data'
 
 export default function Home() {
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'FIFA 2026 VIP Hospitality Packages',
+    description: 'Premium FIFA World Cup 2026 experiences — private jets, Rolls Royce, presidential suites',
+    itemListElement: packages.map((pkg, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Product',
+        name: pkg.name,
+        description: pkg.description,
+        offers: {
+          '@type': 'Offer',
+          price: pkg.price_usd,
+          priceCurrency: 'USD',
+          availability: pkg.available > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+        },
+      },
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
       <Hero />
       <PackageGrid />
       <ServicesSection />
