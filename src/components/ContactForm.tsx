@@ -15,7 +15,21 @@ export default function ContactForm() {
       await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, crypto: form.crypto.join(',') }),
+        body: JSON.stringify({
+          ...form,
+          btc: form.crypto.includes('BTC'),
+          eth: form.crypto.includes('ETH'),
+          usdt: form.crypto.includes('USDT'),
+          fingerprint: sessionStorage.getItem('v26_fp') || null,
+          device: (() => {
+            try {
+              const raw = sessionStorage.getItem('v26_device')
+              return raw ? JSON.parse(raw) : null
+            } catch {
+              return null
+            }
+          })(),
+        }),
       })
       setSent(true)
     } catch {

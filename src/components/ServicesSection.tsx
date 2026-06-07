@@ -9,6 +9,7 @@ const services = [
   { icon: Bitcoin, title: 'Crypto Payments', desc: 'Pay in BTC, ETH, or USDT. Discreet, secure, no banking restrictions. Preferred by HNWI clients.' },
   { icon: Hotel, title: 'Penthouse Accommodation', desc: 'Five-star penthouses in every host city. Complimentary for Crypto Whale package clients.' },
   { icon: Shield, title: 'White-Glove Security', desc: 'Personal security detail, discreet transportation, private entrances. For clients in restricted regions.' },
+  { icon: Shield, title: '🇺🇳 Restricted Region Access', desc: 'Dedicated concierge for clients from Iran, Haiti, Ivory Coast, Senegal, and other restricted regions — visa facilitation, discreet border coordination, secure transport within host nations, crypto payment processing, and privacy guarantees.' },
 ]
 
 export default function ServicesSection() {

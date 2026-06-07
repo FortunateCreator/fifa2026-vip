@@ -1,6 +1,8 @@
 import Hero from '@/components/Hero'
 import PackageGrid from '@/components/PackageGrid'
 import ServicesSection from '@/components/ServicesSection'
+import Testimonials from '@/components/Testimonials'
+import ActivityTicker from '@/components/ActivityTicker'
 import ContactForm from '@/components/ContactForm'
 import { packages } from '@/lib/data'
 
@@ -33,6 +35,7 @@ export default function Home() {
       <Hero />
       <PackageGrid />
       <ServicesSection />
+      <Testimonials />
       <section id="contact" className="border-t border-dark-border py-20">
         <div className="mx-auto max-w-2xl px-4">
           <div className="mb-8 text-center">
@@ -46,6 +49,7 @@ export default function Home() {
           <ContactForm />
         </div>
       </section>
+      <ActivityTicker />
     </>
   )
 }

@@ -40,7 +40,8 @@ export default function Hero() {
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-400">
           Private jet charters · Rolls Royce transfers · Presidential suites · 
-          White-glove crypto concierge for HNWI clients worldwide
+          White-glove crypto concierge for HNWI clients worldwide · 
+          Banned region concierge · Visa facilitation · Secure travel
         </p>
         <div className="mb-10 flex items-center justify-center gap-2 text-sm text-gray-500">
           <span className="text-gold-400">Tournament starts in</span>

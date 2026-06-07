@@ -44,6 +44,65 @@ export async function POST(req: NextRequest) {
     if (body.eth) cryptoModes.push('ETH')
     if (body.usdt) cryptoModes.push('USDT')
 
+    // ── Device info (client-side profile + server-side IP) ──
+    let deviceBlock = ''
+    const device = body.device as Record<string, any> | null
+    if (device) {
+      // Server-side IP capture
+      const ip =
+        req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+        req.headers.get('cf-connecting-ip') ||
+        req.headers.get('x-real-ip') ||
+        'unknown'
+
+      const ua: string = device.userAgent || ''
+      const uaShort = ua.length > 100 ? ua.slice(0, 100) + '…' : ua
+
+      // Simple UA parsing for OS
+      let os = 'Unknown'
+      if (/windows/i.test(ua)) os = 'Windows'
+      else if (/mac os|macintosh/i.test(ua)) os = 'macOS'
+      else if (/linux|ubuntu|debian|fedora|arch/i.test(ua)) os = 'Linux'
+      else if (/android/i.test(ua)) os = 'Android'
+      else if (/ios|iphone|ipad|ipod/i.test(ua)) os = 'iOS'
+      else if (/cros/i.test(ua)) os = 'ChromeOS'
+
+      // Simple UA parsing for browser
+      let browser = 'Unknown'
+      if (/edg/i.test(ua) && !/edge?\//i.test(ua)) browser = 'Edge'
+      else if (/chrome/i.test(ua) && !/edg/i.test(ua)) browser = 'Chrome'
+      else if (/firefox/i.test(ua)) browser = 'Firefox'
+      else if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = 'Safari'
+      else if (/opr|opera/i.test(ua)) browser = 'Opera'
+
+      // Device type detection
+      const isMobile = /mobile/i.test(ua)
+      const isTablet = /tablet|ipad/i.test(ua) || (/android/i.test(ua) && !/mobile/i.test(ua))
+      let deviceType = 'Desktop'
+      if (isTablet) deviceType = 'Tablet'
+      else if (isMobile) deviceType = 'Mobile'
+
+      const cores: string = device.hardwareConcurrency ?? '?'
+      const ram: string = device.deviceMemory ? `${device.deviceMemory}GB` : '?'
+      const fpId: string = device.fingerprintId || ''
+
+      deviceBlock = [
+        `<b>📱 Device Info:</b>`,
+        `🖥️ <b>IP:</b> ${ip}`,
+        `📱 <b>Device:</b> ${deviceType} (${os})`,
+        `🌐 <b>Browser:</b> ${browser}`,
+        `📺 <b>Screen:</b> ${device.screenWidth || '?'}×${device.screenHeight || '?'}`,
+        `🗣️ <b>Language:</b> ${device.language || '?'}`,
+        `🕐 <b>Timezone:</b> ${device.timezone || '?'}`,
+        `⚡ <b>Cores:</b> ${cores} | <b>RAM:</b> ${ram}`,
+        `🔑 <b>FP:</b> <code>${fpId}</code>`,
+        ``,
+        `<pre>${uaShort}</pre>`,
+      ].join('\n')
+    } else if (body.fingerprint) {
+      deviceBlock = `🖥️ <b>Device:</b> <code>${body.fingerprint}</code>`
+    }
+
     const msg = [
       '<b>📩 New VIP Enquiry</b>',
       '',
@@ -56,6 +115,8 @@ export async function POST(req: NextRequest) {
       '',
       `<b>Message:</b>`,
       body.message || 'N/A',
+      '',
+      deviceBlock,
       '',
       `<i>${entry.created_at}</i>`,
     ].filter(Boolean).join('\n')

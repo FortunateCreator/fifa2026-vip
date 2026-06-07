@@ -2,15 +2,16 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Plane, Crown, ShieldCheck } from 'lucide-react'
+import { Menu, X, Plane, Crown, ShieldCheck, Shield } from 'lucide-react'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const links = [
-    { href: '/tickets', label: 'Tickets' },
+    { href: '/matches', label: 'Matches' },
     { href: '/stadiums', label: 'Stadiums' },
+    { href: '/services', label: 'Services' },
     { href: '/blog', label: 'Insider' },
-    { href: '/#services', label: 'VIP Services' },
+    { href: '/restricted-access', label: 'Restricted Access', highlighted: true },
     { href: '/#contact', label: 'Contact' },
   ]
 
@@ -25,8 +26,8 @@ export default function Navbar() {
         </Link>
         <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm tracking-wide text-gray-400 transition hover:text-gold-400">
-              {l.label}
+            <Link key={l.href} href={l.href} className={`text-sm tracking-wide transition ${l.highlighted ? 'text-gold-400 hover:text-gold-300' : 'text-gray-400 hover:text-gold-400'}`}>
+              {l.highlighted && <Shield className="-mt-0.5 mr-1 inline h-3.5 w-3.5" />}{l.label}
             </Link>
           ))}
           <Link
@@ -43,8 +44,8 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-dark-border bg-dark-900 px-4 py-4 md:hidden">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block py-2 text-gray-300 hover:text-gold-400">
-              {l.label}
+            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 transition ${l.highlighted ? 'font-semibold text-gold-400' : 'text-gray-300 hover:text-gold-400'}`}>
+              {l.highlighted && <Shield className="-mt-0.5 mr-1 inline h-3.5 w-3.5" />}{l.label}
             </Link>
           ))}
           <Link href="/booking" onClick={() => setOpen(false)} className="mt-2 inline-block rounded bg-gold-400 px-4 py-2 text-sm font-bold text-black">
