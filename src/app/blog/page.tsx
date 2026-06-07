@@ -1,8 +1,34 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
+  description: 'Expert guides, insider tips, and luxury travel insights for the FIFA 2026 World Cup. Stadium guides, VIP packages, and the ultimate World Cup experience.',
+  openGraph: {
+    title: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
+    description: 'Expert guides, insider tips, and luxury travel insights for the FIFA 2026 World Cup. Stadium guides, VIP packages, and the ultimate World Cup experience.',
+    type: 'website',
+    url: 'https://www.vantage26.com/blog',
+    images: [
+      {
+        url: '/og-default.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
+    description: 'Expert guides, insider tips, and luxury travel insights for the FIFA 2026 World Cup.',
+    images: ['/og-default.svg'],
+  },
+}
 
 interface BlogPost {
   id: string

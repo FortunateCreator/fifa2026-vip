@@ -8,11 +8,35 @@ import DeviceFingerprint from '@/components/DeviceFingerprint'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.vantage26.com'),
   title: 'Vantage 26 — FIFA 2026 VIP Hospitality & Ticket Concierge',
   description: 'Private jet charters, Rolls Royce transfers, presidential suites for HNWI clients. Crypto payments accepted. Vantage 26 — the ultimate FIFA World Cup 2026 experience.',
   icons: {
     icon: '/favicon.svg',
     apple: '/apple-touch-icon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Vantage 26',
+    title: 'Vantage 26 — FIFA 2026 VIP Hospitality & Ticket Concierge',
+    description: 'Private jet charters, Rolls Royce transfers, presidential suites for HNWI clients. Crypto payments accepted. Vantage 26 — the ultimate FIFA World Cup 2026 experience.',
+    url: 'https://www.vantage26.com',
+    images: [
+      {
+        url: '/og-default.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Vantage 26 — FIFA 2026 VIP Hospitality',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@vantage26',
+    title: 'Vantage 26 — FIFA 2026 VIP Hospitality & Ticket Concierge',
+    description: 'Private jet charters, Rolls Royce transfers, presidential suites for HNWI clients. Crypto payments accepted.',
+    images: ['/og-default.svg'],
   },
 }
 

@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -25,6 +26,45 @@ function getPostBySlug(slug: string): BlogPost | null {
     if (p.slug === slug && p.status === 'published') return p
   }
   return null
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
+
+  if (!post) {
+    return {
+      title: 'Post Not Found — Vantage 26',
+    }
+  }
+
+  const url = `https://www.vantage26.com/blog/${post.slug}`
+
+  return {
+    title: `${post.title} — Vantage 26`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.created_at,
+      url,
+      images: [
+        {
+          url: '/og-default.svg',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: ['/og-default.svg'],
+    },
+  }
 }
 
 function renderMarkdown(md: string): string {
