@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: 'https://www.vantage26.com/blog',
     images: [
       {
-        url: '/og-default.svg',
+        url: '/og-default.png',
         width: 1200,
         height: 630,
         alt: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Vantage 26 Insider — FIFA 2026 VIP Blog',
     description: 'Expert guides, insider tips, and luxury travel insights for the FIFA 2026 World Cup.',
-    images: ['/og-default.svg'],
+    images: ['/og-default.png'],
   },
 }
 

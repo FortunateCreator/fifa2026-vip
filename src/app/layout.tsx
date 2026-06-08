@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: 'https://www.vantage26.com',
     images: [
       {
-        url: '/og-default.svg',
+        url: '/og-default.png',
         width: 1200,
         height: 630,
         alt: 'Vantage 26 — FIFA 2026 VIP Hospitality',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     site: '@vantage26',
     title: 'Vantage 26 — FIFA 2026 VIP Hospitality & Ticket Concierge',
     description: 'Private jet charters, Rolls Royce transfers, presidential suites for HNWI clients. Crypto payments accepted.',
-    images: ['/og-default.svg'],
+    images: ['/og-default.png'],
   },
 }
 
