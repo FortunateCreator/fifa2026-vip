@@ -51,8 +51,8 @@ function CountdownTimer({ deadline }: { deadline: Date }) {
   )
 }
 
-export default function BookingClient({ initialPkg: _initialPkg }: { initialPkg: Package | null }) {
-  const [pkg, setPkg] = useState<Package | null>(_initialPkg)
+export default function BookingClient({ initialPkg }: { initialPkg: Package }) {
+  const [pkg, setPkg] = useState<Package | null>(initialPkg)
   const [liveBookers, setLiveBookers] = useState(0)
   const [selectedSeatSection, setSelectedSeatSection] = useState<string | null>(null)
   const paymentRef = useRef<HTMLDivElement>(null)
