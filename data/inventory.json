@@ -1,29 +1,29 @@
 {
   "inventory": {
-    "p1": 4,
+    "p1": 3,
     "p2": 8,
     "p3": 15,
-    "p4": 30,
+    "p4": 29,
     "p5": 6,
-    "p6": 12,
-    "p7": 49,
+    "p6": 10,
+    "p7": 48,
     "p8": 3,
     "p9": 10,
     "p10": 19,
     "p11": 4,
     "p12": 8,
     "p13": 15,
-    "p14": 2,
-    "p15": 5,
-    "p16": 9,
-    "p17": 18,
+    "p14": 1,
+    "p15": 4,
+    "p16": 7,
+    "p17": 17,
     "p18": 2,
     "p19": 6,
     "p20": 7,
-    "p21": 14,
+    "p21": 12,
     "p22": 4,
     "p23": 8,
-    "p24": 25,
+    "p24": 24,
     "p25": 1,
     "p26": 2,
     "p27": 3,
@@ -99,6 +99,97 @@
       "packageName": "Chairman's Suite — R32",
       "timestamp": "2026-06-07T21:49:19.250Z",
       "fingerprint": "1bf098479d6e35f54512571c50ac8cc8"
+    },
+    {
+      "id": "33a1e540-e371-4e1c-b5e9-9d00a0379e64",
+      "packageId": "p7",
+      "packageName": "Standard Entry — Group Stage",
+      "timestamp": "2026-06-07T22:23:10.172Z",
+      "fingerprint": "572cc6ed2754212523a8936eb216c3f0"
+    },
+    {
+      "id": "bfde3df9-a3c8-4bb3-8025-1350ee7a18f3",
+      "packageId": "p21",
+      "packageName": "Gold — Semi-Final",
+      "timestamp": "2026-06-07T22:23:18.851Z",
+      "fingerprint": "572cc6ed2754212523a8936eb216c3f0"
+    },
+    {
+      "id": "16e6995b-3d37-416c-a803-a85d447a1416",
+      "packageId": "p16",
+      "packageName": "Gold Experience — QF",
+      "timestamp": "2026-06-07T22:27:29.254Z",
+      "fingerprint": "2069de059e13e594ee28157877b2f1b4"
+    },
+    {
+      "id": "0234b0dc-902e-4ee3-bad4-889aac511707",
+      "packageId": "p16",
+      "packageName": "Gold Experience — QF",
+      "timestamp": "2026-06-07T22:27:38.410Z",
+      "fingerprint": "2069de059e13e594ee28157877b2f1b4"
+    },
+    {
+      "id": "15c12655-90df-4611-86a6-b9315fc82bea",
+      "packageId": "p17",
+      "packageName": "Silver Seat — QF",
+      "timestamp": "2026-06-07T22:49:45.857Z",
+      "fingerprint": "f6ffd66338d1f9a4524defd978f625a8"
+    },
+    {
+      "id": "3d944055-50a3-462f-a772-c53f87f98d92",
+      "packageId": "p21",
+      "packageName": "Gold — Semi-Final",
+      "timestamp": "2026-06-07T22:49:50.572Z",
+      "fingerprint": "f6ffd66338d1f9a4524defd978f625a8"
+    },
+    {
+      "id": "a1045f30-c6cc-4abc-9bcb-01f407bc5fd7",
+      "packageId": "p24",
+      "packageName": "Silver Seat — Third Place",
+      "timestamp": "2026-06-08T00:22:10.619Z",
+      "fingerprint": "202a8307778d60eff9ff4689e3ee65c7"
+    },
+    {
+      "id": "3edb2850-46b8-4c9d-87da-db430ae3fc0d",
+      "packageId": "p6",
+      "packageName": "Premium Lounge — Group Stage",
+      "timestamp": "2026-06-08T00:24:20.303Z",
+      "fingerprint": "202a8307778d60eff9ff4689e3ee65c7"
+    },
+    {
+      "id": "214e0b92-19ad-4e46-810e-232ac0857ec3",
+      "packageId": "p14",
+      "packageName": "Presidential Suite — QF",
+      "timestamp": "2026-06-08T00:24:29.827Z",
+      "fingerprint": "202a8307778d60eff9ff4689e3ee65c7"
+    },
+    {
+      "id": "4e24d0aa-7b3b-40ff-991a-f1ab1c75b007",
+      "packageId": "p1",
+      "packageName": "Presidential Suite — Opening",
+      "timestamp": "2026-06-08T06:00:32.335Z",
+      "fingerprint": "20869462858d80a071d33e42d61bbcdd"
+    },
+    {
+      "id": "d5ebcf5f-6290-4705-856c-64efa803068c",
+      "packageId": "p15",
+      "packageName": "Skybox Elite — QF",
+      "timestamp": "2026-06-08T06:00:40.311Z",
+      "fingerprint": "20869462858d80a071d33e42d61bbcdd"
+    },
+    {
+      "id": "1d70902f-8cb1-4585-9e82-d42758ee4f4d",
+      "packageId": "p4",
+      "packageName": "Silver Seat — Opening",
+      "timestamp": "2026-06-08T06:36:04.385Z",
+      "fingerprint": "39821607971955a61c0c62dc31c98e53"
+    },
+    {
+      "id": "d317b2b7-8ff1-409a-adce-b010a2982272",
+      "packageId": "p6",
+      "packageName": "Premium Lounge — Group Stage",
+      "timestamp": "2026-06-08T06:36:11.437Z",
+      "fingerprint": "39821607971955a61c0c62dc31c98e53"
     }
   ]
 }

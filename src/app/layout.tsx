@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   title: 'Vantage 26 — FIFA 2026 VIP Hospitality & Ticket Concierge',
   description: 'Private jet charters, Rolls Royce transfers, presidential suites for HNWI clients. Crypto payments accepted. Vantage 26 — the ultimate FIFA World Cup 2026 experience.',
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
     apple: '/apple-touch-icon.svg',
   },
   openGraph: {

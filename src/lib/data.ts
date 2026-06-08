@@ -159,6 +159,46 @@ const IMG = {
   cryptoLuxury: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=600&q=80',
 }
 
+// SVG image mapping for package cards — generated luxury vector art
+export const PACKAGE_SVG_MAP: Record<string, string> = {
+  p1: '/images/packages/presidential.svg',
+  p2: '/images/packages/diamond.svg',
+  p3: '/images/packages/gold.svg',
+  p4: '/images/packages/silver.svg',
+  p5: '/images/packages/vip-skybox.svg',
+  p6: '/images/packages/premium-lounge.svg',
+  p7: '/images/packages/standard.svg',
+  p8: '/images/packages/chairman.svg',
+  p9: '/images/packages/platinum.svg',
+  p10: '/images/packages/silver.svg',
+  p11: '/images/packages/diamond.svg',
+  p12: '/images/packages/platinum.svg',
+  p13: '/images/packages/gold.svg',
+  p14: '/images/packages/presidential.svg',
+  p15: '/images/packages/vip-skybox.svg',
+  p16: '/images/packages/gold.svg',
+  p17: '/images/packages/silver.svg',
+  p18: '/images/packages/presidential.svg',
+  p19: '/images/packages/vip-skybox.svg',
+  p20: '/images/packages/platinum.svg',
+  p21: '/images/packages/gold.svg',
+  p22: '/images/packages/vip-skybox.svg',
+  p23: '/images/packages/platinum.svg',
+  p24: '/images/packages/silver.svg',
+  p25: '/images/packages/crypto-whale.svg',
+  p26: '/images/packages/presidential.svg',
+  p27: '/images/packages/vip-skybox.svg',
+  p28: '/images/packages/gold.svg',
+  p29: '/images/packages/diamond.svg',
+  p30: '/images/packages/vip-skybox.svg',
+  p31: '/images/packages/vip-skybox.svg',
+  p32: '/images/packages/vip-skybox.svg',
+}
+
+export function packageSvgPath(pkg: Package): string {
+  return PACKAGE_SVG_MAP[pkg.id] || pkg.image
+}
+
 export const packages = [
   // ===== OPENING MATCH (Estadio Azteca, June 11) =====
   { id: 'p1', image: IMG.luxurySuite, name: 'Presidential Suite — Opening', match_id: 'm1', match_type: 'opening', match_date: '2026-06-11', venue_name: 'Estadio Azteca', description: 'Rolls Royce Phantom pickup, Category 1 seats, pre-match hospitality lounge with champagne service, dedicated driver for the day.', price_usd: 45000, includes_jet: false, includes_rolls_royce: true, includes_hospitality: true, seats: 'Category 1', available: 4, crypto_only: false },

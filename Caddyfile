@@ -1,0 +1,26 @@
+vantage26.com, www.vantage26.com {
+    # Webmail - Roundcube under /webmail prefix
+    handle_path /webmail* {
+        root * /var/www/webmail/public_html
+        php_fastcgi unix//run/php/php-fpm.sock
+        file_server
+    }
+
+    # Main Next.js app
+    reverse_proxy localhost:3000
+
+    # Force HTTPS (Caddy auto-handles this)
+    # www canonical redirect — Caddy handles this via the hostname list
+
+    header {
+        # Security headers
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    encode gzip
+
+    # Let's Encrypt HTTP challenge (auto)
+}

@@ -45,6 +45,12 @@ export default function Home() {
             <p className="mt-2 text-gray-400">
               Submit an enquiry and our concierge team will respond within 24 hours with a curated proposal.
             </p>
+            <p className="mt-1 text-xs text-gray-500">
+              or email{' '}
+              <a href="mailto:support@vantage26.com" className="text-gold-400 underline transition hover:text-gold-300">
+                support@vantage26.com
+              </a>
+            </p>
           </div>
           <ContactForm />
         </div>

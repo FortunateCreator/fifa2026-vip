@@ -106,6 +106,12 @@ export default function ContactForm() {
       >
         {loading ? 'Sending...' : 'Send Enquiry'} <Send className="h-4 w-4" />
       </button>
+      <p className="mt-3 text-center text-xs text-gray-500">
+        Or email us directly at{' '}
+        <a href="mailto:support@vantage26.com" className="text-gold-400 underline transition hover:text-gold-300">
+          support@vantage26.com
+        </a>
+      </p>
     </form>
   )
 }

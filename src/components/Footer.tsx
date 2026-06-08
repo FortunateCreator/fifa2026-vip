@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-dark-border bg-dark-950">
       <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Brand */}
           <div>
             <Link href="/" className="mb-4 flex items-center gap-2">
@@ -20,6 +20,28 @@ export default function Footer() {
               Independent luxury hospitality concierge for the FIFA World Cup 2026. Private jets,
               Rolls Royce transfers, and presidential suites for HNWI clients.
             </p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
+              Contact
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="mailto:support@vantage26.com"
+                  className="text-sm text-gray-400 transition hover:text-gold-400"
+                >
+                  support@vantage26.com
+                </a>
+              </li>
+              <li>
+                <p className="text-sm text-gray-500">
+                  Email us for VIP enquiries
+                </p>
+              </li>
+            </ul>
           </div>
 
           {/* Legal Links */}
