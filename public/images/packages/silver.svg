@@ -1,53 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
-  <defs>
-    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#D4A843" />
-      <stop offset="50%" stop-color="#B8860B" />
-      <stop offset="100%" stop-color="#8B6914" />
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0A0A0A" />
-      <stop offset="50%" stop-color="#111" />
-      <stop offset="100%" stop-color="#0A0A0A" />
-    </linearGradient>
-    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#222" />
-      <stop offset="100%" stop-color="#111" />
-    </linearGradient>
-    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C0C0C0" />
-      <stop offset="50%" stop-color="#A9A9A9" />
-      <stop offset="100%" stop-color="#808080" />
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
-    </filter>
-  </defs>
-  <rect width="600" height="400" fill="url(#bgGrad)" rx="12"/>
-  <rect x="4" y="4" width="592" height="392" fill="none" stroke="#B8860B" stroke-width="0.5" rx="10" opacity="0.3"/>
-  <!-- Subtle radial glow -->
-  <circle cx="300" cy="200" r="180" fill="#B8860B" opacity="0.04"/>
-
-  <rect x="200" y="37" width="200" height="36" rx="18" fill="#B8860B" opacity="0.15"/>
-  <text x="300" y="59" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="url(#goldGrad)" letter-spacing="3">ESSENTIAL ACCESS</text>
-  <g transform="translate(300,140) scale(1.0)" fill="none" stroke="url(#goldGrad)" stroke-width="2">
-    <rect x="-40" y="-25" width="80" height="50" rx="4" fill="url(#goldGrad)" opacity="0.08"/>
-    <circle cx="0" cy="-25" r="6" fill="#0A0A0A"/>
-    <circle cx="0" cy="25" r="6" fill="#0A0A0A"/>
-    <!-- perforation -->
-    <line x1="-15" y1="-25" x2="-15" y2="25" stroke-width="1" stroke-dasharray="2,3" opacity="0.5"/>
-    <line x1="15" y1="-25" x2="15" y2="25" stroke-width="1" stroke-dasharray="2,3" opacity="0.5"/>
-    <text x="0" y="5" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="url(#goldGrad)" opacity="0.6">V26</text>
-  </g>
-  <line x1="220" y1="210" x2="380" y2="210" stroke="#B8860B" stroke-width="0.5" opacity="0.4"/>
-  <text x="300" y="255" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="30" fill="#FFFFFF" font-weight="700" letter-spacing="2">Silver Seat</text>
-  <text x="300" y="290" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#D4A843" letter-spacing="4" opacity="0.8">Standard seating — pure football. Best value for the world's biggest stage.</text>
-  <line x1="220" y1="320" x2="380" y2="320" stroke="#B8860B" stroke-width="0.5" opacity="0.4"/>
-  <text x="300" y="350" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="url(#goldGrad)" letter-spacing="2" font-weight="700">$3,500–$14,000</text>
-  <rect x="0" y="396" width="600" height="4" fill="url(#goldGrad)" rx="2"/>
-  <text x="585" y="385" text-anchor="end" font-family="Georgia,serif" font-size="11" fill="#B8860B" opacity="0.15" letter-spacing="2">VANTAGE 26</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<defs>
+<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#A0A0A030"/>
+  <stop offset="50%" stop-color="#050508"/>
+  <stop offset="100%" stop-color="#60606025"/>
+</linearGradient>
+<linearGradient id="acc" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#C0C0C0"/>
+  <stop offset="40%" stop-color="#A0A0A0"/>
+  <stop offset="100%" stop-color="#C0C0C0"/>
+</linearGradient>
+<filter id="glow">
+  <feGaussianBlur stdDeviation="4" result="b"/>
+  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+<filter id="sh">
+  <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+</filter>
+<linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+  <stop offset="0%" stop-color="#C0C0C0" stop-opacity="0"/>
+  <stop offset="30%" stop-color="#C0C0C0" stop-opacity="0.08"/>
+  <stop offset="70%" stop-color="#C0C0C0" stop-opacity="0.08"/>
+  <stop offset="100%" stop-color="#C0C0C0" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="diag" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#C0C0C0" stop-opacity="0.08"/>
+  <stop offset="50%" stop-color="#C0C0C0" stop-opacity="0.15"/>
+  <stop offset="100%" stop-color="#C0C0C0" stop-opacity="0.08"/>
+</linearGradient>
+<linearGradient id="fGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+  <stop offset="0%" stop-color="#181822"/>
+  <stop offset="100%" stop-color="#0E0E14"/>
+</linearGradient>
+<pattern id="ornate" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+  <path d="M0,40 L40,0 L80,40 L40,80 Z" fill="none" stroke="C0C0C0" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="40" cy="40" r="8" fill="none" stroke="C0C0C0" stroke-width="0.3" opacity="0.06"/>
+  <circle cx="0" cy="0" r="4" fill="none" stroke="C0C0C0" stroke-width="0.2" opacity="0.06"/>
+  <circle cx="80" cy="0" r="4" fill="none" stroke="C0C0C0" stroke-width="0.2" opacity="0.06"/>
+  <circle cx="0" cy="80" r="4" fill="none" stroke="C0C0C0" stroke-width="0.2" opacity="0.06"/>
+  <circle cx="80" cy="80" r="4" fill="none" stroke="C0C0C0" stroke-width="0.2" opacity="0.06"/>
+</pattern>
+</defs>
+<rect width="800" height="500" fill="url(#bg)"/>
+<rect width="800" height="500" fill="url(#ornate)"/>
+<line x1="-300" y1="0" x2="0" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="-240" y1="0" x2="60" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="-180" y1="0" x2="120" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="-120" y1="0" x2="180" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="-60" y1="0" x2="240" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="0" y1="0" x2="300" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="60" y1="0" x2="360" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="120" y1="0" x2="420" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="180" y1="0" x2="480" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="240" y1="0" x2="540" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="300" y1="0" x2="600" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="360" y1="0" x2="660" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="420" y1="0" x2="720" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="480" y1="0" x2="780" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="540" y1="0" x2="840" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="600" y1="0" x2="900" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="660" y1="0" x2="960" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="720" y1="0" x2="1020" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="780" y1="0" x2="1080" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="840" y1="0" x2="1140" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="900" y1="0" x2="1200" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="960" y1="0" x2="1260" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="1020" y1="0" x2="1320" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="1080" y1="0" x2="1380" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<line x1="1140" y1="0" x2="1440" y2="500" stroke="url(#diag)" stroke-width="0.5"/>
+<rect x="6" y="6" width="788" height="488" rx="12" fill="none" stroke="url(#acc)" stroke-width="0.5" opacity="0.4"/>
+<rect x="12" y="12" width="776" height="476" rx="8" fill="none" stroke="#C0C0C0" stroke-width="0.3" opacity="0.15"/>
+<rect x="0" y="494" width="800" height="6" fill="url(#acc)" rx="3"/>
+<rect x="200" y="0" width="400" height="2" fill="url(#acc)" opacity="0.3"/>
+<circle cx="45" cy="45" r="18" fill="none" stroke="url(#acc)" stroke-width="1.5" opacity="0.4"/>
+<circle cx="45" cy="45" r="12" fill="none" stroke="url(#acc)" stroke-width="0.5" opacity="0.3"/>
+<circle cx="45" cy="45" r="4" fill="url(#acc)" opacity="0.5"/>
+<rect x="35" y="72" width="20" height="2" fill="url(#acc)" opacity="0.5" rx="1"/>
+<text x="45" y="88" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#C0C0C0" letter-spacing="2" opacity="0.6">SILVER</text>
+<text x="400" y="110" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="36" fill="#FFFFFF" font-weight="700" letter-spacing="3" filter="url(#sh)">Silver Seat</text>
+<text x="400" y="132" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C0C0C0" letter-spacing="5" opacity="0.6">— CURATED FOR DISCERNING TASTE —</text>
+<circle cx="400" cy="280" r="130" fill="none" stroke="url(#acc)" stroke-width="0.3" opacity="0.08"/>
+<circle cx="400" cy="280" r="105" fill="none" stroke="url(#acc)" stroke-width="0.5" opacity="0.12"/>
+<circle cx="400" cy="280" r="85" fill="none" stroke="url(#acc)" stroke-width="0.8" opacity="0.15"/>
+<path d="M490.0,280.0 L489.2,284.5 L488.1,288.8 L486.9,293.1 L485.4,297.3 L483.7,301.4 L481.9,305.3 L479.8,309.1 L477.6,312.8 L475.2,316.3 L472.7,319.7 L470.0,322.9 L467.2,326.0 L464.2,328.8 L461.2,331.5 L458.0,334.0 L454.7,336.3 L451.4,338.5 L447.9,340.4 L444.4,342.1 L440.9,343.7 L437.3,345.0 L433.7,346.2 L430.0,347.1 L426.4,347.9 L422.7,348.4 L419.1,348.8 L415.5,348.9 L411.9,348.9 L408.3,348.7 L404.8,348.3 L401.4,347.8 L398.0,347.0 L394.8,346.1 L391.5,345.1 L388.4,343.9 L385.4,342.5 L382.5,341.0 L379.7,339.4 L377.0,337.6 L374.5,335.8 L372.0,333.8 L369.8,331.7 L367.6,329.5 L365.6,327.3 L363.7,324.9 L362.0,322.5 L360.4,320.1 L359.0,317.6 L357.7,315.0 L356.6,312.4 L355.6,309.8 L354.8,307.2 L354.1,304.6 L353.6,301.9 L353.2,299.3 L353.0,296.7 L352.9,294.1 L353.0,291.6 L353.2,289.1 L353.5,286.6 L353.9,284.2 L354.5,281.9 L355.1,279.6 L355.9,277.4 L356.8,275.3 L357.8,273.3 L358.9,271.3 L360.1,269.5 L361.4,267.7 L362.7,266.0 L364.1,264.5 L365.6,263.0 L367.1,261.7 L368.6,260.4 L370.2,259.3 L371.9,258.3 L373.6,257.3 L375.2,256.5 L376.9,255.9 L378.6,255.3 L380.3,254.8 L382.0,254.4 L383.7,254.2 L385.4,254.0 L387.0,254.0 L388.6,254.0 L390.2,254.1 L391.7,254.4 L393.2,254.7 L394.6,255.1 L396.0,255.5 L397.3,256.1 L398.5,256.7 L399.7,257.4 L400.8,258.1 L401.9,258.9 L402.8,259.7 L403.7,260.6 L404.5,261.5 L405.2,262.4 L405.8,263.4 L406.4,264.3 L406.9,265.3 L407.3,266.3 L407.6,267.3 L407.8,268.3 L407.9,269.3 L408.0,270.3 L408.0,271.2 L407.9,272.1 L407.8,273.0 L407.6,273.8 L407.3,274.7 L406.9,275.4 L406.5,276.1 L406.1,276.8 L405.6,277.4 L405.1,278.0 L404.5,278.5 L403.9,278.9 L403.2,279.2 L402.5,279.5 L401.8,279.8 L401.1,279.9 L400.4,280.0" fill="none" stroke="#C0C0C0" stroke-width="0.5" opacity="0.06"/>
+<g transform="translate(400,280)" filter="url(#sh)">
+  <polygon points="55.0,0.0 20.3,8.4 38.9,38.9 8.4,20.3 0.0,55.0 -8.4,20.3 -38.9,38.9 -20.3,8.4 -55.0,0.0 -20.3,-8.4 -38.9,-38.9 -8.4,-20.3 -0.0,-55.0 8.4,-20.3 38.9,-38.9 20.3,-8.4" fill="none" stroke="url(#acc)" stroke-width="1" opacity="0.25"/>
+  <polygon points="32.3,13.4 9.9,9.9 13.4,32.3 0.0,14.0 -13.4,32.3 -9.9,9.9 -32.3,13.4 -14.0,0.0 -32.3,-13.4 -9.9,-9.9 -13.4,-32.3 -0.0,-14.0 13.4,-32.3 9.9,-9.9 32.3,-13.4 14.0,-0.0" fill="none" stroke="url(#acc)" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="0" cy="0" r="10" fill="url(#acc)" opacity="0.1"/>
+  <circle cx="0" cy="0" r="4" fill="url(#acc)" opacity="0.3"/>
+</g>
+<rect x="12" y="12" width="776" height="476" rx="8" fill="url(#sheen)"/>
+<text x="400" y="390" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#aaaaaa" letter-spacing="1" textLength="580">Standard seat with fan zone access. Best value for experiencing the historic World Cup.</text>
+<text x="400" y="460" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="28" fill="url(#acc)" font-weight="700" letter-spacing="2" filter="url(#sh)">$3,500–$8,000</text>
+<path d="M20,25 L20,20 L25,20" fill="none" stroke="#C0C0C0" stroke-width="0.5" opacity="0.3"/>
+<path d="M780,25 L780,20 L775,20" fill="none" stroke="#C0C0C0" stroke-width="0.5" opacity="0.3"/>
+<path d="M20,475 L20,480 L25,480" fill="none" stroke="#C0C0C0" stroke-width="0.5" opacity="0.3"/>
+<path d="M780,475 L780,480 L775,480" fill="none" stroke="#C0C0C0" stroke-width="0.5" opacity="0.3"/>
+<text x="780" y="480" text-anchor="end" font-family="Georgia,serif" font-size="10" fill="#C0C0C0" opacity="0.08" letter-spacing="3">VANTAGE 26</text>
 </svg>

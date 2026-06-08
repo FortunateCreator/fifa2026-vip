@@ -13,7 +13,7 @@
     "p11": 4,
     "p12": 8,
     "p13": 15,
-    "p14": 1,
+    "p14": 0,
     "p15": 4,
     "p16": 7,
     "p17": 17,
@@ -23,7 +23,7 @@
     "p21": 12,
     "p22": 4,
     "p23": 7,
-    "p24": 24,
+    "p24": 23,
     "p25": 1,
     "p26": 2,
     "p27": 3,
@@ -218,6 +218,20 @@
       "packageName": "Silver — R32",
       "timestamp": "2026-06-08T08:32:42.434Z",
       "fingerprint": "20869462858d80a071d33e42d61bbcdd"
+    },
+    {
+      "id": "f62d2456-3bfd-4e3f-af68-c72c9fe32a38",
+      "packageId": "p14",
+      "packageName": "Presidential Suite — QF",
+      "timestamp": "2026-06-08T11:39:39.691Z",
+      "fingerprint": "35af947006ff4244900601712fa8dc0d"
+    },
+    {
+      "id": "8dd1f4c9-fbff-4508-92df-0d84c6877d80",
+      "packageId": "p24",
+      "packageName": "Silver Seat — Third Place",
+      "timestamp": "2026-06-08T11:39:41.234Z",
+      "fingerprint": "35af947006ff4244900601712fa8dc0d"
     }
   ]
 }
