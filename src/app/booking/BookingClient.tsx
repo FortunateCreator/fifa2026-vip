@@ -19,14 +19,23 @@ const sectionLabels: Record<string, string> = {
 }
 
 function CountdownTimer({ deadline }: { deadline: Date }) {
-  const [seconds, setSeconds] = useState(Math.floor((deadline.getTime() - Date.now()) / 1000))
+  const [mounted, setMounted] = useState(false)
+  const [seconds, setSeconds] = useState(0)
 
   useEffect(() => {
+    setMounted(true)
+    setSeconds(Math.floor((deadline.getTime() - Date.now()) / 1000))
+
     const interval = setInterval(() => {
       setSeconds(Math.floor((deadline.getTime() - Date.now()) / 1000))
     }, 1000)
     return () => clearInterval(interval)
   }, [deadline])
+
+  if (!mounted) {
+    // SSR guard — render placeholder to avoid hydration mismatch
+    return <span className="font-mono text-amber-400">—</span>
+  }
 
   if (seconds <= 0) {
     return (

@@ -20,12 +20,12 @@
     "p18": 1,
     "p19": 6,
     "p20": 7,
-    "p21": 12,
+    "p21": 11,
     "p22": 3,
     "p23": 7,
     "p24": 23,
     "p25": 1,
-    "p26": 2,
+    "p26": 1,
     "p27": 3,
     "p28": 8
   },
@@ -246,6 +246,20 @@
       "packageName": "Presidential Suite — Opening",
       "timestamp": "2026-06-08T13:31:01.252Z",
       "fingerprint": "35af947006ff4244900601712fa8dc0d"
+    },
+    {
+      "id": "3ae35d0a-100c-4b2d-a64b-649b192b0d63",
+      "packageId": "p26",
+      "packageName": "Presidential Suite — Final",
+      "timestamp": "2026-06-08T13:36:07.811Z",
+      "fingerprint": "b9464d07b97511398470daf85c41206f"
+    },
+    {
+      "id": "f4ee7bee-957f-4ea9-b32d-72891f653159",
+      "packageId": "p21",
+      "packageName": "Gold — Semi-Final",
+      "timestamp": "2026-06-08T13:36:31.966Z",
+      "fingerprint": "b9464d07b97511398470daf85c41206f"
     }
   ]
 }
