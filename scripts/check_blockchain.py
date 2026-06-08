@@ -16,10 +16,10 @@ WALLETS = {
     'btc': {'address': 'bc1qsma38ulsfdttz68ay53pjmk7rg3pt30q9ej99z', 'api': 'https://blockstream.info/api/address/'},
     'evm': {'address': '0xAed3734Fd468997D2276F9135CFC90c3A7aff9A4', 'api': 'https://eth.blockscout.com/api/v2/addresses/'},
     'usdt': {'address': 'TJassXnUTZeQMtR5KULPHBpFryXevxntWu', 'api': 'https://api.trongrid.io/v1/accounts/'},
-    'bch': {'address': 'bitcoincash:qque8kx9axk4qjv9wzdz0zszg6klrgefucj8vl7uxh', 'api': 'https://rest.bitcoin.com/v2/address/details/'},
+    'bch': {'address': 'bitcoincash:qqe8kx9axk4qjv9wzdz0zszg6klrgefucj8vl7uxh', 'api': 'blockbook'},
     'xrp': {'address': 'rMZuai5PyR6RuRxnjLp1QPzQVWYF6A9gA', 'api': 'https://api.xrpscan.com/api/v1/account/'},
-    'doge': {'address': 'DGhmz775P55msjL4YtJqg8VSWkEoSbzzif', 'api': 'https://sochain.com/api/v2/get_address_balance/DOGE/'},
-    'ltc': {'address': 'ltc1qx80ktv4q4v2mvqk29gm6nwj0zn5gl64ht6a9zf', 'api': 'https://sochain.com/api/v2/get_address_balance/LTC/'},
+    'doge': {'address': 'DGhmz775P55msjL4YtJqg8VSWkEoSbzzif', 'api': 'blockcypher'},
+    'ltc': {'address': 'ltc1qx80ktv4q4v2mvqk29gm6nwj0zn5gl64ht6a9zf', 'api': 'blockcypher'},
 }
 
 def fetch_json(url, timeout=TIMEOUT):
@@ -76,26 +76,65 @@ def check_trongrid(addr):
     d = data if isinstance(data, dict) else {}
     return d.get('total_transactions', 0) or 0, None
 
-def check_bitcoincom(addr):
-    """BCH via rest.bitcoin.com."""
-    clean = addr.replace('bitcoincash:', '')
-    data = fetch_json(f"https://rest.bitcoin.com/v2/address/details/{clean}")
-    if '_error' in data:
-        return 0, data['_error']
-    return data.get('totalTxCount', 0) or data.get('txCount', 0) or data.get('tx_count', 0) or 0, None
+def cashaddr_to_legacy(cashaddr):
+    """Convert BCH cashaddr (without prefix) to legacy P2SH address."""
+    try:
+        charset = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
+        addr_clean = cashaddr.replace('bitcoincash:', '').lower()
+        five_bit = [charset.index(c) for c in addr_clean]
+        payload_5bit = five_bit[:-8]  # strip checksum (last 8 chars)
+        payload_5bit = payload_5bit[1:]  # strip version byte
+        eight_bit = []
+        for i in range(0, len(payload_5bit), 8):
+            chunk = payload_5bit[i:i+8]
+            if len(chunk) < 5:
+                break
+            acc = 0
+            bits = 0
+            for val in chunk:
+                acc = (acc << 5) | val
+                bits += 5
+            while bits >= 8:
+                bits -= 8
+                eight_bit.append((acc >> bits) & 0xFF)
+        hash160 = bytes(eight_bit[:20])
+        import hashlib
+        payload = b'\x05' + hash160
+        checksum = hashlib.sha256(hashlib.sha256(payload).digest()).digest()[:4]
+        alphabet = b'123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+        n = int.from_bytes(payload + checksum, 'big')
+        res = []
+        while n > 0:
+            n, r = divmod(n, 58)
+            res.append(alphabet[r])
+        return bytes(reversed(res)).decode()
+    except Exception as e:
+        return None
 
-def check_sochain(addr, coin):
-    """DOGE/LTC via Sochain."""
-    data = fetch_json(f"https://sochain.com/api/v2/get_address_balance/{coin}/{addr}")
+def check_bch_blockbook(addr):
+    """BCH via Blockbook API (bchblockexplorer.com)."""
+    import hashlib
+    legacy = cashaddr_to_legacy(addr)
+    if not legacy:
+        return 0, 'could not convert address'
+    data = fetch_json(f"https://bchblockexplorer.com/api/v2/address/{legacy}")
     if '_error' in data:
         return 0, data['_error']
-    d = data.get('data', {})
-    if d and isinstance(d, dict):
-        # Sochain doesn't directly give tx_count, but we can use the data
-        # For our purposes, we track if there's any balance/activity
-        txs = d.get('transactions', [])
-        return len(txs) if txs else (1 if float(d.get('confirmed_balance', 0) or 0) > 0 else 0), None
-    return 0, None
+    # Blockbook returns txs array (or 0 if empty), plus unconfirmed
+    txs = data.get('txs', [])
+    if isinstance(txs, int):
+        txs = 0
+    else:
+        txs = len(txs)
+    unconfirmed = data.get('unconfirmedTxs', 0)
+    return txs + unconfirmed, None
+
+def check_blockcypher(addr, coin):
+    """DOGE/LTC via Blockcypher — free, no key needed, reliable."""
+    data = fetch_json(f"https://api.blockcypher.com/v1/{coin}/main/addrs/{addr}")
+    if '_error' in data:
+        return 0, data['_error']
+    return data.get('final_n_tx', 0) + data.get('unconfirmed_n_tx', 0), None
 
 def main():
     # Load existing cache
@@ -125,18 +164,11 @@ def main():
             elif wid == 'xrp':
                 tx_count, error = check_xrp(addr)
             elif wid == 'bch':
-                tx_count, error = check_bitcoincom(addr)
-                if error:
-                    # Use blockchair as fallback - accept potential failure
-                    tx_count, _ = 0, error
+                tx_count, error = check_bch_blockbook(addr)
             elif wid == 'doge':
-                tx_count, error = check_sochain(addr, 'DOGE')
-                if error:
-                    tx_count, _ = 0, error
+                tx_count, error = check_blockcypher(addr, 'doge')
             elif wid == 'ltc':
-                tx_count, error = check_sochain(addr, 'LTC')
-                if error:
-                    tx_count, _ = 0, error
+                tx_count, error = check_blockcypher(addr, 'ltc')
         except Exception as e:
             error = str(e)
 
