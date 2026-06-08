@@ -1,4 +1,4 @@
-import { packages } from '@/lib/data'
+import { packages, packageSvgPath } from '@/lib/data'
 import Link from 'next/link'
 import PackageCard from '@/components/PackageCard'
 
@@ -60,7 +60,9 @@ export default async function TicketsPage({
           }),
         }}
       />
-      {packages.map((pkg) => (
+      {packages.map((pkg) => {
+        const svgUrl = `https://www.vantage26.com${packageSvgPath(pkg)}`
+        return (
         <script
           key={pkg.id}
           type="application/ld+json"
@@ -70,17 +72,49 @@ export default async function TicketsPage({
               '@type': 'Product',
               name: pkg.name,
               description: pkg.description,
+              image: [svgUrl],
+              brand: {
+                '@type': 'Brand',
+                name: 'Vantage 26',
+              },
               offers: {
                 '@type': 'Offer',
                 price: pkg.price_usd,
                 priceCurrency: 'USD',
                 availability: pkg.available > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
                 url: 'https://www.vantage26.com/booking',
+                hasMerchantReturnPolicy: {
+                  '@type': 'MerchantReturnPolicy',
+                  applicableCountry: 'US',
+                  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                },
+                shippingDetails: {
+                  '@type': 'OfferShippingDetails',
+                  shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'US',
+                  },
+                  deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: 0,
+                      maxValue: 1,
+                      unitCode: 'DAY',
+                    },
+                    transitTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: 0,
+                      maxValue: 0,
+                      unitCode: 'DAY',
+                    },
+                  },
+                },
               },
             }),
           }}
-        />
-      ))}
+        />)
+      })}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-8 text-center">
