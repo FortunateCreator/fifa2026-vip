@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import Link from 'next/link'
 import type { Package } from '@/lib/data'
 import StadiumSelector from '@/components/StadiumSelector'
-import BitcoinPaymentFlow from '@/components/BitcoinPaymentFlow'
+import CryptoPaymentFlow from '@/components/CryptoPaymentFlow'
 
 function getRandomBookers() {
   return Math.floor(Math.random() * (24 - 8 + 1)) + 8
@@ -169,7 +169,7 @@ export default function BookingClient({ initialPkg: _initialPkg }: { initialPkg:
 
               {/* Payment section — scroll target */}
               <div ref={paymentRef} id="payment-section">
-                <BitcoinPaymentFlow pkg={pkg} />
+                <CryptoPaymentFlow pkg={pkg} />
               </div>
             </>
           ) : (

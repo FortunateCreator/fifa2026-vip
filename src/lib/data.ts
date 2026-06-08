@@ -262,3 +262,106 @@ export type Venue = typeof venues[0]
 export type Match = typeof matches[0]
 export type Package = typeof packages[0]
 export type Group = typeof groups[0]
+
+// ── Crypto Wallet Addresses ─────────────────────────────────
+export interface CryptoWallet {
+  id: string
+  name: string
+  shortName: string
+  symbol: string
+  address: string
+  network: string
+  explorerUrl: string
+  priority: 'featured' | 'secondary'
+  evmChains?: string[]
+  checkApi?: string
+  checkPath?: string
+}
+
+export const cryptoWallets: CryptoWallet[] = [
+  {
+    id: 'btc',
+    name: 'Bitcoin',
+    shortName: 'BTC',
+    symbol: '₿',
+    address: 'bc1qsma38ulsfdttz68ay53pjmk7rg3pt30q9ej99z',
+    network: 'Bitcoin (BTC)',
+    explorerUrl: 'https://blockstream.info/address/',
+    priority: 'featured',
+    checkApi: 'https://blockstream.info/api/address/',
+    checkPath: '',
+  },
+  {
+    id: 'evm',
+    name: 'EVM (ETH / Polygon / Arbitrum / Base / Optimism)',
+    shortName: 'ETH+EVM',
+    symbol: '⟠',
+    address: '0xAed3734Fd468997D2276F9135CFC90c3A7aff9A4',
+    network: 'Ethereum & EVM Chains',
+    explorerUrl: 'https://etherscan.io/address/',
+    priority: 'featured',
+    evmChains: ['Ethereum', 'Polygon', 'Arbitrum', 'Base', 'Optimism'],
+    checkApi: 'https://api.blockchair.com/ethereum/dashboards/address/',
+    checkPath: '.data.{addr}.address.tx_count',
+  },
+  {
+    id: 'usdt',
+    name: 'USDT (TRC-20)',
+    shortName: 'USDT',
+    symbol: '₮',
+    address: 'TJassXnUTZeQMtR5KULPHBpFryXevxntWu',
+    network: 'TRON (TRC-20)',
+    explorerUrl: 'https://tronscan.org/#/address/',
+    priority: 'featured',
+    checkApi: 'https://apilist.tronscanapi.com/api/accountv2?address=',
+    checkPath: '',
+  },
+  {
+    id: 'bch',
+    name: 'Bitcoin Cash',
+    shortName: 'BCH',
+    symbol: 'B',
+    address: 'bitcoincash:qque8kx9axk4qjv9wzdz0zszg6klrgefucj8vl7uxh',
+    network: 'Bitcoin Cash (BCH)',
+    explorerUrl: 'https://blockchair.com/bitcoin-cash/address/',
+    priority: 'secondary',
+    checkApi: 'https://api.blockchair.com/bitcoin-cash/dashboards/address/',
+    checkPath: '.data.{addr}.address.tx_count',
+  },
+  {
+    id: 'xrp',
+    name: 'XRP',
+    shortName: 'XRP',
+    symbol: 'X',
+    address: 'rMZuai5PyR6RuRxnjLp1QPzQVWYF6A9gA',
+    network: 'XRP Ledger',
+    explorerUrl: 'https://livenet.xrpl.org/accounts/',
+    priority: 'secondary',
+    checkApi: 'https://api.xrpscan.com/api/v1/account/',
+    checkPath: '',
+  },
+  {
+    id: 'doge',
+    name: 'Dogecoin',
+    shortName: 'DOGE',
+    symbol: 'Ð',
+    address: 'DGhmz775P55msjL4YtJqg8VSWkEoSbzzif',
+    network: 'Dogecoin (DOGE)',
+    explorerUrl: 'https://blockchair.com/dogecoin/address/',
+    priority: 'secondary',
+    checkApi: 'https://api.blockchair.com/dogecoin/dashboards/address/',
+    checkPath: '.data.{addr}.address.tx_count',
+  },
+  {
+    id: 'ltc',
+    name: 'Litecoin',
+    shortName: 'LTC',
+    symbol: 'Ł',
+    address: 'ltc1qx80ktv4q4v2mvqk29gm6nwj0zn5gl64ht6a9zf',
+    network: 'Litecoin (LTC)',
+    explorerUrl: 'https://blockchair.com/litecoin/address/',
+    priority: 'secondary',
+    checkApi: 'https://api.blockchair.com/litecoin/dashboards/address/',
+    checkPath: '.data.{addr}.address.tx_count',
+  },
+]
