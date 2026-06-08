@@ -17,12 +17,12 @@
     "p15": 4,
     "p16": 7,
     "p17": 17,
-    "p18": 2,
+    "p18": 1,
     "p19": 6,
     "p20": 7,
     "p21": 12,
     "p22": 4,
-    "p23": 8,
+    "p23": 7,
     "p24": 24,
     "p25": 1,
     "p26": 2,
@@ -190,6 +190,20 @@
       "packageName": "Premium Lounge — Group Stage",
       "timestamp": "2026-06-08T06:36:11.437Z",
       "fingerprint": "39821607971955a61c0c62dc31c98e53"
+    },
+    {
+      "id": "f7e6b66e-a16a-4759-ba27-0eb7910ba291",
+      "packageId": "p23",
+      "packageName": "Platinum — Third Place",
+      "timestamp": "2026-06-08T08:00:14.964Z",
+      "fingerprint": "20869462858d80a071d33e42d61bbcdd"
+    },
+    {
+      "id": "c423326e-49dd-4f65-be04-ee3616ebdf96",
+      "packageId": "p18",
+      "packageName": "Presidential Suite — Semi-Final",
+      "timestamp": "2026-06-08T08:00:24.004Z",
+      "fingerprint": "20869462858d80a071d33e42d61bbcdd"
     }
   ]
 }
