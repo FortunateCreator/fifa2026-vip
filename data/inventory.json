@@ -1,6 +1,6 @@
 {
   "inventory": {
-    "p1": 3,
+    "p1": 2,
     "p2": 8,
     "p3": 15,
     "p4": 29,
@@ -21,7 +21,7 @@
     "p19": 6,
     "p20": 7,
     "p21": 12,
-    "p22": 4,
+    "p22": 3,
     "p23": 7,
     "p24": 23,
     "p25": 1,
@@ -231,6 +231,20 @@
       "packageId": "p24",
       "packageName": "Silver Seat — Third Place",
       "timestamp": "2026-06-08T11:39:41.234Z",
+      "fingerprint": "35af947006ff4244900601712fa8dc0d"
+    },
+    {
+      "id": "33b795e2-610e-4ba5-a271-4ca104b90aec",
+      "packageId": "p22",
+      "packageName": "VIP Suite — Third Place",
+      "timestamp": "2026-06-08T13:30:53.651Z",
+      "fingerprint": "35af947006ff4244900601712fa8dc0d"
+    },
+    {
+      "id": "1e553de0-6979-47db-bda9-b79233943b0c",
+      "packageId": "p1",
+      "packageName": "Presidential Suite — Opening",
+      "timestamp": "2026-06-08T13:31:01.252Z",
       "fingerprint": "35af947006ff4244900601712fa8dc0d"
     }
   ]
