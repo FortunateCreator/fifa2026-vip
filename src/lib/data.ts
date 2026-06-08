@@ -151,52 +151,52 @@ export const matches = [
 ]
 
 const IMG = {
-  luxurySuite: 'https://images.unsplash.com/photo-1573879541250-58ae8b322b40?w=600&q=80',
-  privateJet: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=600&q=80',
-  luxuryCar: 'https://images.unsplash.com/photo-1631295868223-63265b40d498?w=600&q=80',
-  stadiumVIP: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80',
-  stadiumCrowd: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=80',
-  cryptoLuxury: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=600&q=80',
+  luxurySuite: 'https://images.unsplash.com/photo-1573879541250-58ae8b322b40?w=3840&q=90',
+  privateJet: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=3840&q=90',
+  luxuryCar: 'https://images.unsplash.com/photo-1631295868223-63265b40d498?w=3840&q=90',
+  stadiumVIP: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=3840&q=90',
+  stadiumCrowd: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=3840&q=90',
+  cryptoLuxury: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=3840&q=90',
 }
 
-// SVG image mapping for package cards — generated luxury vector art
-export const PACKAGE_SVG_MAP: Record<string, string> = {
-  p1: '/images/packages/presidential.svg',
-  p2: '/images/packages/diamond.svg',
-  p3: '/images/packages/gold.svg',
-  p4: '/images/packages/silver.svg',
-  p5: '/images/packages/vip-skybox.svg',
-  p6: '/images/packages/premium-lounge.svg',
-  p7: '/images/packages/standard.svg',
-  p8: '/images/packages/chairman.svg',
-  p9: '/images/packages/platinum.svg',
-  p10: '/images/packages/silver.svg',
-  p11: '/images/packages/diamond.svg',
-  p12: '/images/packages/platinum.svg',
-  p13: '/images/packages/gold.svg',
-  p14: '/images/packages/presidential.svg',
-  p15: '/images/packages/vip-skybox.svg',
-  p16: '/images/packages/gold.svg',
-  p17: '/images/packages/silver.svg',
-  p18: '/images/packages/presidential.svg',
-  p19: '/images/packages/vip-skybox.svg',
-  p20: '/images/packages/platinum.svg',
-  p21: '/images/packages/gold.svg',
-  p22: '/images/packages/vip-skybox.svg',
-  p23: '/images/packages/platinum.svg',
-  p24: '/images/packages/silver.svg',
-  p25: '/images/packages/crypto-whale.svg',
-  p26: '/images/packages/presidential.svg',
-  p27: '/images/packages/vip-skybox.svg',
-  p28: '/images/packages/gold.svg',
-  p29: '/images/packages/diamond.svg',
-  p30: '/images/packages/vip-skybox.svg',
-  p31: '/images/packages/vip-skybox.svg',
-  p32: '/images/packages/vip-skybox.svg',
+// 4K WebP image mapping for package cards — downloaded real photos
+export const PACKAGE_IMAGE_MAP: Record<string, string> = {
+  p1: '/images/packages/presidential.webp',
+  p2: '/images/packages/diamond.webp',
+  p3: '/images/packages/gold.webp',
+  p4: '/images/packages/silver.webp',
+  p5: '/images/packages/vip-skybox.webp',
+  p6: '/images/packages/premium-lounge.webp',
+  p7: '/images/packages/standard.webp',
+  p8: '/images/packages/chairman.webp',
+  p9: '/images/packages/platinum.webp',
+  p10: '/images/packages/silver.webp',
+  p11: '/images/packages/diamond.webp',
+  p12: '/images/packages/platinum.webp',
+  p13: '/images/packages/gold.webp',
+  p14: '/images/packages/presidential.webp',
+  p15: '/images/packages/vip-skybox.webp',
+  p16: '/images/packages/gold.webp',
+  p17: '/images/packages/silver.webp',
+  p18: '/images/packages/presidential.webp',
+  p19: '/images/packages/vip-skybox.webp',
+  p20: '/images/packages/platinum.webp',
+  p21: '/images/packages/gold.webp',
+  p22: '/images/packages/vip-skybox.webp',
+  p23: '/images/packages/platinum.webp',
+  p24: '/images/packages/silver.webp',
+  p25: '/images/packages/crypto-whale.webp',
+  p26: '/images/packages/presidential.webp',
+  p27: '/images/packages/vip-skybox.webp',
+  p28: '/images/packages/gold.webp',
+  p29: '/images/packages/diamond.webp',
+  p30: '/images/packages/vip-skybox.webp',
+  p31: '/images/packages/vip-skybox.webp',
+  p32: '/images/packages/vip-skybox.webp',
 }
 
-export function packageSvgPath(pkg: Package): string {
-  return PACKAGE_SVG_MAP[pkg.id] || pkg.image
+export function packageImagePath(pkg: Package): string {
+  return PACKAGE_IMAGE_MAP[pkg.id] || pkg.image
 }
 
 export const packages = [

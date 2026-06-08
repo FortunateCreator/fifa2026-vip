@@ -1,7 +1,7 @@
 'use client'
 
 import { Plane, Car, Crown } from 'lucide-react'
-import { Package, packageSvgPath } from '@/lib/data'
+import { Package, packageImagePath } from '@/lib/data'
 import { useState, useEffect, useRef } from 'react'
 
 export default function PackageCard({ pkg, liveAvailable }: { pkg: Package; liveAvailable?: number }) {
@@ -37,7 +37,7 @@ export default function PackageCard({ pkg, liveAvailable }: { pkg: Package; live
       {/* Package Image */}
       <div className="relative h-[180px] w-full overflow-hidden">
         <img
-          src={packageSvgPath(pkg)}
+          src={packageImagePath(pkg)}
           alt={pkg.name}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
           loading="lazy"

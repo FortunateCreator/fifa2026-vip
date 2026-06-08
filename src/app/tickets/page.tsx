@@ -1,4 +1,4 @@
-import { packages, packageSvgPath } from '@/lib/data'
+import { packages, packageImagePath } from '@/lib/data'
 import Link from 'next/link'
 import PackageCard from '@/components/PackageCard'
 
@@ -61,7 +61,7 @@ export default async function TicketsPage({
         }}
       />
       {packages.map((pkg) => {
-        const svgUrl = `https://www.vantage26.com${packageSvgPath(pkg)}`
+        const svgUrl = `https://www.vantage26.com${packageImagePath(pkg)}`
         return (
         <script
           key={pkg.id}
