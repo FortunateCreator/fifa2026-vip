@@ -9,7 +9,7 @@
     "p7": 48,
     "p8": 3,
     "p9": 10,
-    "p10": 19,
+    "p10": 18,
     "p11": 4,
     "p12": 8,
     "p13": 15,
@@ -203,6 +203,13 @@
       "packageId": "p18",
       "packageName": "Presidential Suite — Semi-Final",
       "timestamp": "2026-06-08T08:00:24.004Z",
+      "fingerprint": "20869462858d80a071d33e42d61bbcdd"
+    },
+    {
+      "id": "15321422-50d0-4937-b64c-b8b6549d2d5f",
+      "packageId": "p10",
+      "packageName": "Silver — R32",
+      "timestamp": "2026-06-08T08:23:22.397Z",
       "fingerprint": "20869462858d80a071d33e42d61bbcdd"
     }
   ]

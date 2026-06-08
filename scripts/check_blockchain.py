@@ -3,7 +3,7 @@
 Blockchain Checker — polls all Vantage 26 crypto wallets every 10 minutes.
 Writes to data/payment-cache.json. Lightweight: ~2KB cache, ~5s total runtime.
 """
-import json, os, sys, time
+import json, os, sys, time, subprocess
 from urllib.request import urlopen, Request
 from urllib.error import URLError
 
@@ -155,6 +155,15 @@ def main():
 
         status = '+' if new_tx else '='
         print(f"  [{status}] {wid}: {tx_count} tx{' ' + ('(NEW!)' if new_tx else '')}{' | err: ' + error[:50] if error else ''}")
+
+        # If new transaction detected, trigger booking confirmation
+        if new_tx and error is None:
+            try:
+                script = os.path.join(BASE, 'scripts', 'confirm_bookings.js')
+                subprocess.run(['node', script, wid], capture_output=True, text=True, timeout=15)
+                print(f"  🔔 Confirmation triggered for {wid}")
+            except Exception as e:
+                print(f"  ⚠️ Confirmation script failed: {e}")
 
     # Write cache
     os.makedirs(os.path.dirname(CACHE), exist_ok=True)

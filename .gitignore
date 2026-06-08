@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# runtime data
+data/v26.db
+data/v26.db-shm
+data/v26.db-wal
+data/v26.db-journal
+data/sessions.json
+data/payment-cache.json

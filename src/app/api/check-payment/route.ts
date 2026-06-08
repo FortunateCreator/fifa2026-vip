@@ -1,67 +1,59 @@
-// /api/check-payment — lightweight cache-based verification
-// The cron job updates data/payment-cache.json every 10 min.
-// This endpoint reads from cache — no external API calls at request time.
+// /api/check-payment — checks if a pending booking has been confirmed
+// Supports: ?booking_id=X (client polling) | ?wallet=X&tx=1 (legacy)
 
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-
-interface PaymentCache {
-  [walletId: string]: {
-    tx_count: number
-    last_tx: string | null
-    amount: number | null
-    checked_at: string
-    confirmed: boolean
-  }
-}
+import { getPendingBooking } from '@/lib/db'
 
 const CACHE_PATH = path.join(process.cwd(), 'data', 'payment-cache.json')
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
+  const bookingId = searchParams.get('booking_id')
   const walletId = searchParams.get('wallet')
-  const txParam = searchParams.get('tx') // presence = check for new tx
 
-  if (!walletId) {
-    return NextResponse.json({ error: 'Missing wallet param' }, { status: 400 })
-  }
+  // ── Primary: booking_id lookup ────────────────────────
+  if (bookingId) {
+    const booking = getPendingBooking(bookingId)
+    if (!booking) {
+      return NextResponse.json({ error: 'Booking not found' }, { status: 404 })
+    }
 
-  try {
-    let cache: PaymentCache = {}
+    // Check payment cache for wallet activity
+    let cache: any = {}
     if (fs.existsSync(CACHE_PATH)) {
-      const raw = fs.readFileSync(CACHE_PATH, 'utf-8')
-      cache = JSON.parse(raw)
+      try { cache = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf-8')) } catch {}
     }
 
-    const entry = cache[walletId]
-    if (!entry) {
-      return NextResponse.json({
-        wallet: walletId,
-        confirmed: false,
-        tx_count: 0,
-        last_tx: null,
-        checked_at: null,
-      })
-    }
+    const walletData = cache[booking.wallet_id]
+    const hasTx = walletData && walletData.tx_count > 0 && walletData.tx_count > (booking.tx_count_at_check || 0)
 
-    // If tx param is set, the client wants to know if there's NEW activity
-    if (txParam !== null) {
-      return NextResponse.json({
-        wallet: walletId,
-        confirmed: entry.confirmed,
-        tx_count: entry.tx_count,
-        last_tx: entry.last_tx,
-        amount: entry.amount,
-        checked_at: entry.checked_at,
-        // Mark confirmed if we've seen at least one tx
-        first_tx: entry.tx_count > 0,
-      })
-    }
-
-    // Just return cache state
-    return NextResponse.json(entry)
-  } catch {
-    return NextResponse.json({ error: 'Cache read failed' }, { status: 500 })
+    return NextResponse.json({
+      booking_id: bookingId,
+      status: hasTx ? 'confirmed' : booking.status,
+      confirmed: hasTx || booking.status === 'confirmed',
+      wallet: booking.wallet_id,
+      tx_count: walletData?.tx_count || 0,
+      email: booking.email,
+    })
   }
+
+  // ── Legacy: wallet lookup ─────────────────────────────
+  if (walletId) {
+    let cache: any = {}
+    if (fs.existsSync(CACHE_PATH)) {
+      try { cache = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf-8')) } catch {}
+    }
+    const entry = cache[walletId]
+    return NextResponse.json({
+      wallet: walletId,
+      confirmed: entry?.confirmed || false,
+      tx_count: entry?.tx_count || 0,
+      last_tx: entry?.last_tx || null,
+      checked_at: entry?.checked_at || null,
+    })
+  }
+
+  return NextResponse.json({ error: 'Missing booking_id or wallet param' }, { status: 400 })
 }

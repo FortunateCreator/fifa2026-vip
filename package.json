@@ -12,6 +12,7 @@
     "@fingerprintjs/fingerprintjs": "^5.2.0",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
+    "better-sqlite3": "^12.10.0",
     "lucide-react": "^1.17.0",
     "next": "16.2.6",
     "qrcode.react": "^4.2.0",
