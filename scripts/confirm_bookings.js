@@ -113,7 +113,20 @@ cache[walletId]._last_confirmed = new Date().toISOString()
 fs.writeFileSync(CACHE, JSON.stringify(cache, null, 2))
 
 // ── Send email via Resend ─────────────────────────────────
-const RESEND_KEY = process.env.RESEND_API_KEY
+const RESEND_KEY = process.env.RESEND_API_KEY || (() => {
+  // Fallback: read from .env.local
+  try {
+    const envPath = path.join(BASE, '.env.local')
+    if (fs.existsSync(envPath)) {
+      const lines = fs.readFileSync(envPath, 'utf-8').split('\n')
+      for (const l of lines) {
+        const m = l.match(/^RESEND_API_KEY=(.+)$/)
+        if (m) return m[1].replace(/^["']|["']$/g, '')
+      }
+    }
+  } catch {}
+  return null
+})()
 if (RESEND_KEY) {
   sendEmail(booking.email, booking.name, password, booking.package_name)
     .then(r => console.log(`Email sent to ${booking.email}: ${r}`))

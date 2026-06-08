@@ -53,7 +53,7 @@ function CountdownTimer({ deadline }: { deadline: Date }) {
 
 export default function BookingClient({ initialPkg: _initialPkg }: { initialPkg: Package | null }) {
   const [pkg, setPkg] = useState<Package | null>(_initialPkg)
-  const [liveBookers, setLiveBookers] = useState(getRandomBookers)
+  const [liveBookers, setLiveBookers] = useState(0)
   const [selectedSeatSection, setSelectedSeatSection] = useState<string | null>(null)
   const paymentRef = useRef<HTMLDivElement>(null)
   const selectedSeatRef = useRef<string | null>(null)
